@@ -1,0 +1,31 @@
+services:
+  test_django:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: test_django
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    depends_on:
+      - test_db
+    volumes:
+      - .:/app
+    entrypoint: sh /app/entrypoints/test-django-entrypoint.sh
+  
+  test_db:
+    image: postgres:15
+    container_name: test_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_HOST: ${DB_HOST}
+      POSTGRES_PORT: 5432
+    ports:
+      - "5433:5432"
+volumes:
+  postgres_data:
