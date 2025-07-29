@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /app/src/shared/infrastructure/django
+cd /app/src/core/infrastructure/django
 
 if [ ! -f wsgi.py ]; then
     echo "Error $(pwd)"

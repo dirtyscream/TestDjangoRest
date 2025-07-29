@@ -1,0 +1,30 @@
+from core.application.viewsets.base_viewset import BaseModelViewSet
+from account.application.service import AccountService
+from account.presentation.rest.serializer import AccountSerializer
+
+
+class AccountViewSet(BaseModelViewSet):
+    serializer_class = AccountSerializer
+    service = AccountService()
+    
+    def get_entity(self, entity_id: str):
+        return self.service.get_account(entity_id)
+
+    def get_all_entities(self):
+        return self.service.get_all_accounts()
+
+    def create_entity(self, data: dict):
+        return self.service.create_account(
+            owner_name=data['owner_name'],
+            balance=data['balance']
+        )
+
+    def update_entity(self, entity_id: str, data: dict):
+        return self.service.update_account(
+            account_id=entity_id,
+            owner_name=data.get('owner_name'),
+            balance=data.get('balance')
+        )
+
+    def delete_entity(self, entity_id: str):
+        return self.service.delete_account(entity_id)
