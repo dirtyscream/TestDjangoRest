@@ -18,13 +18,3 @@ class AccountViewSet(BaseModelViewSet):
             owner_name=data['owner_name'],
             balance=data['balance']
         )
-
-    def update_entity(self, entity_id: str, data: dict):
-        return self.service.update_account(
-            account_id=entity_id,
-            owner_name=data.get('owner_name'),
-            balance=data.get('balance')
-        )
-
-    def delete_entity(self, entity_id: str):
-        return self.service.delete_account(entity_id)

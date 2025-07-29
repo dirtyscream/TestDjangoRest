@@ -1,20 +1,30 @@
-import uuid
 from dataclasses import dataclass
-from typing import Optional
-from datetime import datetime
+from uuid import UUID
+from account.domain.exception import (
+    InsufficientFundsException,
+    SelfTransferException,
+    NegativeAmountException
+)
+from decimal import Decimal
 
 
-@dataclass(kw_only=True)
+@dataclass
 class Account:
-    id: Optional[uuid.UUID] = None
+    id: UUID
     owner_name: str
     balance: float
-    created_at: datetime
 
-    def __eq__(self, other):
-        if isinstance(other, Account):
-            return self.id == other.id
-        return False
+    def transfer_to(self, target_account: 'Account', amount: Decimal) -> None:
+        self._validate_transfer(target_account, amount)
+        self.balance -= amount
+        target_account.balance += amount
 
-    def __hash__(self):
-        return hash(self.id) if self.id else 0
+    def _validate_transfer(self, target_account: 'Account', amount: Decimal) -> None:
+        if amount <= 0:
+            raise NegativeAmountException("Transfer amount must be positive")
+        if self.id == target_account.id:
+            raise SelfTransferException("Cannot transfer to the same account")
+        if self.balance < amount:
+            raise InsufficientFundsException(
+                f"Insufficient funds. Available: {self.balance}, required: {amount}"
+            )

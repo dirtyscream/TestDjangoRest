@@ -8,7 +8,7 @@ class AccountRepository:
         self.model_mapper = model_mapper
 
     def save(self, entity: BlogPost) -> BlogPost:
-        instance: AccountModel = self.model_mapper.to_instance(entity=entity)
+        instance: AccountModel = self.model_mapper.to_model(entity=entity)
         instance.save()
         return self.model_mapper.to_entity(instance=instance)
 

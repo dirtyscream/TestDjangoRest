@@ -3,8 +3,6 @@ from core.application.mixins.mixins import (
     RetrieveModelMixin,
     ListModelMixin,
     CreateModelMixin,
-    UpdateModelMixin,
-    DestroyModelMixin
 )
 
 
@@ -12,8 +10,6 @@ class BaseModelViewSet(
     RetrieveModelMixin,
     ListModelMixin,
     CreateModelMixin,
-    UpdateModelMixin,
-    DestroyModelMixin,
     GenericViewSet
 ):
 
