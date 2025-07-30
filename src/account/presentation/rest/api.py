@@ -1,3 +1,4 @@
+from injector import inject
 from core.application.viewsets.base_viewset import BaseModelViewSet
 from account.application.service import AccountService
 from account.presentation.rest.serializer import AccountSerializer
@@ -5,7 +6,11 @@ from account.presentation.rest.serializer import AccountSerializer
 
 class AccountViewSet(BaseModelViewSet):
     serializer_class = AccountSerializer
-    service = AccountService()
+
+    @inject
+    def __init__(self, service: AccountService, **kwargs):
+        self.service = service
+        super().__init__(**kwargs)
 
     def get_entity(self, entity_id: str):
         return self.service.get_account(entity_id)

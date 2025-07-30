@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "8d4b67d22226c49c28f6d7b027db263e525351ee3d4f1db9df4c76dc09cfdced"
+            "sha256": "4eac703c1a12f469fe57e721ad25f5b97aeb9b95dfc0aaf3b3bf67444a9b1d3f"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -32,6 +32,13 @@
             "index": "pypi",
             "markers": "python_version >= '3.10'",
             "version": "==5.2.4"
+        },
+        "django-injector": {
+            "hashes": [
+                "sha256:2627fbf5a13adcb0b4db25c59bb8f433ba7533ed11a5b6d84ac9767fb8bf6cbc"
+            ],
+            "index": "pypi",
+            "version": "==0.3.1"
         },
         "django-rest-framework": {
             "hashes": [
@@ -65,6 +72,13 @@
             "index": "pypi",
             "markers": "python_version >= '3.7'",
             "version": "==23.0.0"
+        },
+        "injector": {
+            "hashes": [
+                "sha256:74379ccef3b893bc7d0b7d504c255b5160c5a55e97dc7bdcc73cb33cc7dce3a1",
+                "sha256:79b2d4a0874c75d3aa735f11c5b32b89d9542711ca07071161882c5e9cc15ed6"
+            ],
+            "version": "==0.22.0"
         },
         "ninja": {
             "hashes": [

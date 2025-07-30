@@ -1,6 +1,8 @@
 from uuid import UUID
 from typing import List, Optional
 from decimal import Decimal
+
+from injector import inject
 from account.domain.entity import Account
 from account.domain.exception import AccountNotFoundException
 from account.infrastructure.database.models import AccountModel
@@ -8,6 +10,8 @@ from account.infrastructure.database.repository.rdb import AccountRepository
 
 
 class AccountService:
+
+    @inject
     def __init__(self, repository: AccountRepository):
         self.repository = repository
 

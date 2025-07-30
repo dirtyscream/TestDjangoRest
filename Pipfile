@@ -11,6 +11,7 @@ gunicorn = "*"
 ninja = "*"
 clear = "*"
 drf-nested-routers = "*"
+django-injector = "*"
 
 [dev-packages]
 
