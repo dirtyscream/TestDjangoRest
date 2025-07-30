@@ -6,6 +6,7 @@ from account.domain.exception import (
     NegativeAmountException
 )
 from decimal import Decimal
+from datetime import datetime
 
 
 @dataclass
@@ -13,6 +14,7 @@ class Account:
     id: UUID
     owner_name: str
     balance: Decimal
+    created_at: datetime
 
     def transfer_to(self, target_account: 'Account', amount: Decimal) -> None:
         self._validate_transfer(target_account, amount)

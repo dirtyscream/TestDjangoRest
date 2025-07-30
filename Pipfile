@@ -8,10 +8,6 @@ django = "*"
 django-rest-framework = "*"
 psycopg2-binary = "*"
 gunicorn = "*"
-ninja = "*"
-clear = "*"
-drf-nested-routers = "*"
-django-injector = "*"
 
 [dev-packages]
 

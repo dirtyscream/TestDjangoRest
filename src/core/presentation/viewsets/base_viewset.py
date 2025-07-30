@@ -1,5 +1,5 @@
 from rest_framework.viewsets import GenericViewSet
-from core.application.mixins.mixins import (
+from core.presentation.mixins.mixins import (
     RetrieveModelMixin,
     ListModelMixin,
     CreateModelMixin,

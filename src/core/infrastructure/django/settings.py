@@ -14,12 +14,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    "account.infrastructure.django.apps.AccountConfig",
-    "django_injector",
-]
-
-DJANGO_INJECTOR_MODULES = [
-    'account.infrastructure.container.AccountContainer',
+    "account.infrastructure.django.apps.AccountConfig"
 ]
 
 MIGRATION_MODULES = {

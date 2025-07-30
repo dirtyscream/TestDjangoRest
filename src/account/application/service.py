@@ -1,19 +1,15 @@
 from uuid import UUID
-from typing import List, Optional
+from typing import List
 from decimal import Decimal
-
-from injector import inject
 from account.domain.entity import Account
 from account.domain.exception import AccountNotFoundException
 from account.infrastructure.database.models import AccountModel
 from account.infrastructure.database.repository.rdb import AccountRepository
+from django.utils import timezone
 
 
 class AccountService:
-
-    @inject
-    def __init__(self, repository: AccountRepository):
-        self.repository = repository
+    repository = AccountRepository()
 
     def get_account(self, account_id: UUID) -> Account:
         try:
@@ -28,6 +24,7 @@ class AccountService:
         account = Account(
             id=None,
             owner_name=owner_name,
-            balance=balance
+            balance=balance,
+            created_at=timezone.now()
         )
         return self.repository.save(account)

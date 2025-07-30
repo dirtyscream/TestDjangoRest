@@ -1,17 +1,12 @@
 from uuid import UUID
 from typing import List
-
-from injector import inject
 from account.domain.entity import Account
 from account.infrastructure.database.models import AccountModel
 from account.infrastructure.database.repository.mapper import AccountMapper
 
 
 class AccountRepository:
-
-    @inject
-    def __init__(self, mapper: AccountMapper):
-        self.mapper = mapper
+    mapper = AccountMapper()
 
     def save(self, entity: Account) -> Account:
         model = self.mapper.to_model(entity)
