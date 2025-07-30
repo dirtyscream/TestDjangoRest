@@ -11,7 +11,7 @@ class AccountMapper:
         return Account(
             id=instance.id,
             owner_name=instance.owner_name,
-            balance=float(instance.balance),
+            balance=instance.balance,
             created_at=instance.created_at,
         )
 
@@ -26,5 +26,5 @@ class AccountMapper:
     def to_entity_list(self, instances: List[AccountModel]) -> List[Account]:
         return [self.to_entity(instance=i) for i in instances]
 
-    def to_instance_list(self, entities: List[Account]) -> List[AccountModel]:
+    def to_model_list(self, entities: List[Account]) -> List[AccountModel]:
         return [self.to_model(entity=e) for e in entities]

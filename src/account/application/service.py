@@ -43,20 +43,6 @@ class AccountService:
         model = AccountModel.objects.get(id=account_id)
         model.delete()
 
-    def transfer_funds(
-        self,
-        from_account_id: uuid.UUID,
-        to_account_id: uuid.UUID,
-        amount: float
-    ) -> None:
-        from_account = self.get_account(from_account_id)
-        to_account = self.get_account(to_account_id)
-        from_account.transfer_to(to_account, amount)
-        AccountModel.objects.filter(id=from_account.id).update(
-            balance=from_account.balance)
-        AccountModel.objects.filter(id=to_account.id).update(
-            balance=to_account.balance)
-
     @staticmethod
     def _to_entity(model: AccountModel) -> Account:
         return Account(

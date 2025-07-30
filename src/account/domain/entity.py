@@ -12,7 +12,7 @@ from decimal import Decimal
 class Account:
     id: UUID
     owner_name: str
-    balance: float
+    balance: Decimal
 
     def transfer_to(self, target_account: 'Account', amount: Decimal) -> None:
         self._validate_transfer(target_account, amount)
