@@ -6,7 +6,7 @@ from account.presentation.rest.serializer import AccountSerializer
 class AccountViewSet(BaseModelViewSet):
     serializer_class = AccountSerializer
     service = AccountService()
-    
+
     def get_entity(self, entity_id: str):
         return self.service.get_account(entity_id)
 

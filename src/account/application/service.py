@@ -1,52 +1,29 @@
-from typing import Optional
-import uuid
-from account.infrastructure.database.models import AccountModel
+from uuid import UUID
+from typing import List, Optional
+from decimal import Decimal
 from account.domain.entity import Account
 from account.domain.exception import AccountNotFoundException
+from account.infrastructure.database.models import AccountModel
+from account.infrastructure.database.repository.rdb import AccountRepository
 
 
 class AccountService:
-    def get_account(self, account_id: uuid.UUID) -> Account:
+    def __init__(self, repository: AccountRepository):
+        self.repository = repository
+
+    def get_account(self, account_id: UUID) -> Account:
         try:
-            model = AccountModel.objects.get(id=account_id)
-            return self._to_entity(model)
+            return self.repository.get_by_id(account_id)
         except AccountModel.DoesNotExist:
             raise AccountNotFoundException(f"Account {account_id} not found")
 
-    def get_all_accounts(self) -> list[Account]:
-        return [self._to_entity(model) for model in AccountModel.objects.all()]
+    def get_all_accounts(self) -> List[Account]:
+        return self.repository.list_all()
 
-    def create_account(self, owner_name: str, balance: float) -> Account:
-        model = AccountModel.objects.create(
+    def create_account(self, owner_name: str, balance: Decimal) -> Account:
+        account = Account(
+            id=None,
             owner_name=owner_name,
             balance=balance
         )
-        return self._to_entity(model)
-
-    def update_account(
-        self,
-        account_id: uuid.UUID,
-        owner_name: Optional[str] = None,
-        balance: Optional[float] = None
-    ) -> Account:
-        model = AccountModel.objects.get(id=account_id)
-
-        if owner_name is not None:
-            model.owner_name = owner_name
-        if balance is not None:
-            model.balance = balance
-
-        model.save()
-        return self._to_entity(model)
-
-    def delete_account(self, account_id: uuid.UUID) -> None:
-        model = AccountModel.objects.get(id=account_id)
-        model.delete()
-
-    @staticmethod
-    def _to_entity(model: AccountModel) -> Account:
-        return Account(
-            id=model.id,
-            owner_name=model.owner_name,
-            balance=model.balance
-        )
+        return self.repository.save(account)
