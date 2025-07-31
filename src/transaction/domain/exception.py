@@ -1,0 +1,4 @@
+
+
+class TransactionNotFoundException(Exception):
+    pass

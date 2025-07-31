@@ -8,6 +8,7 @@ __pycache__/
 *env/
 
 # Distribution / packaging
+staticfiles/
 .Python
 .DS_Store
 build/
