@@ -3,9 +3,10 @@ from typing import List
 from account.domain.entity import Account
 from account.infrastructure.database.models import AccountModel
 from account.infrastructure.database.repository.mapper import AccountMapper
+from account.application.interfaces.repositories.repo import IAccountRepository
 
 
-class AccountRepository:
+class AccountRepository(IAccountRepository):
     mapper = AccountMapper()
 
     def save(self, entity: Account) -> Account:

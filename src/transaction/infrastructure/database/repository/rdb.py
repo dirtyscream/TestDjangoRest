@@ -1,9 +1,10 @@
 
 from transaction.domain.entity import Transaction
 from transaction.infrastructure.database.repository.mapper import TransactionMapper
+from transaction.application.interfaces.repositories.repo import ITransactionRepository
 
 
-class TransactionRepository:
+class TransactionRepository(ITransactionRepository):
     mapper: TransactionMapper = TransactionMapper()
 
     def save(self, transaction: Transaction) -> Transaction:

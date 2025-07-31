@@ -2,13 +2,14 @@ from uuid import UUID
 from decimal import Decimal
 from transaction.domain.entity import Transaction
 from transaction.infrastructure.database.repository.rdb import TransactionRepository
+from transaction.application.interfaces.services.service import ITransactionService
 from account.infrastructure.database.repository.rdb import AccountRepository
 from account.domain.entity import Account
 from django.utils import timezone
 from django.db import transaction as db_transaction
 
 
-class TransactionService:
+class TransactionService(ITransactionService):
     transaction_repository = TransactionRepository()
     account_repository = AccountRepository()
 

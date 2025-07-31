@@ -5,10 +5,11 @@ from account.domain.entity import Account
 from account.domain.exception import AccountNotFoundException
 from account.infrastructure.database.models import AccountModel
 from account.infrastructure.database.repository.rdb import AccountRepository
+from account.application.interfaces.services.service import IAccountService
 from django.utils import timezone
 
 
-class AccountService:
+class AccountService(IAccountService):
     repository = AccountRepository()
 
     def get_account(self, account_id: UUID) -> Account:
