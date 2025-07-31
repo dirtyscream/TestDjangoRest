@@ -12,6 +12,3 @@ class Transaction:
     to_account: Account
     amount: Decimal
     created_at: datetime
-
-    def __post_init__(self):
-        self.from_account.can_transfer(self.to_account, self.amount)

@@ -1,10 +1,14 @@
 from account.application.service import AccountService
-from core.presentation.viewsets.base_viewset import BaseModelViewSet
+from core.presentation.viewsets.base_viewset import BaseViewSet
+from core.presentation.mixins.mixins import ListModelMixin, RetrieveModelMixin, CreateModelMixin
 from account.presentation.rest.serializer import AccountSerializer
 from account.application.service import AccountService
 
 
-class AccountViewSet(BaseModelViewSet):
+class AccountViewSet(BaseViewSet,
+                     ListModelMixin,
+                     RetrieveModelMixin,
+                     CreateModelMixin):
     serializer_class = AccountSerializer
     service = AccountService()
 

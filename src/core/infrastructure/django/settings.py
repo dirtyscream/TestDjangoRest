@@ -14,11 +14,13 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    "account.infrastructure.django.apps.AccountConfig"
+    "account.infrastructure.django.apps.AccountConfig",
+    "transaction.infrastructure.django.apps.TransactionConfig"
 ]
 
 MIGRATION_MODULES = {
     "account": "account.infrastructure.database.migrations",
+    "transaction": "transaction.infrastructure.database.migrations",
 }
 
 MIDDLEWARE = [

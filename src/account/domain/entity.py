@@ -30,3 +30,7 @@ class Account:
             raise InsufficientFundsException(
                 f"Insufficient funds. Available: {self.balance}, required: {amount}"
             )
+
+    def can_transfer(self, target_account: 'Account', amount: Decimal) -> bool:
+        self._validate_transfer(target_account, amount)
+        return True
