@@ -15,7 +15,7 @@ class AccountViewSet(BaseViewSet,
     def get_entity(self, entity_id):
         return self.service.get_account(entity_id)
 
-    def get_all_entities(self):
+    def get_all_entities(self, params: dict | None = None):
         return self.service.get_all_accounts()
 
     def create_entity(self, data: dict):
