@@ -1,12 +1,14 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from uuid import UUID
 from account.domain.exception import (
     InsufficientFundsException,
     SelfTransferException,
-    NegativeAmountException
+    NegativeAmountException,
+    DailyTransferLimitExceeded
 )
 from decimal import Decimal
-from datetime import datetime
+from datetime import datetime, timedelta
+from transaction.domain.entity import Transaction
 
 
 @dataclass
@@ -15,6 +17,8 @@ class Account:
     owner_name: str
     balance: Decimal
     created_at: datetime
+    transactions: list[Transaction] = field(
+        default_factory=list)
 
     def transfer_to(self, target_account: 'Account', amount: Decimal) -> None:
         self._validate_transfer(target_account, amount)

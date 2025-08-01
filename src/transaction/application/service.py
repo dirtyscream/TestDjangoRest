@@ -18,8 +18,8 @@ class TransactionService(ITransactionService):
                          from_account: UUID,
                          to_account: UUID,
                          amount: Decimal) -> Transaction:
-        from_account: Account = self.account_repository.get_by_id(from_account)
-        to_account: Account = self.account_repository.get_by_id(to_account)
+        from_account: Account = self.account_repository.get_by_id(from_account, True)
+        to_account: Account = self.account_repository.get_by_id(to_account, True)
         from_account.transfer_to(to_account, amount)
         self.account_repository.save(from_account)
         self.account_repository.save(to_account)

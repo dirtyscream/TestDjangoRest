@@ -1,14 +1,15 @@
-from dataclasses import dataclass
+# transaction/domain/entity.py
+from dataclasses import dataclass, field
 from uuid import UUID
 from decimal import Decimal
 from datetime import datetime
-from account.domain.entity import Account
 
 
 @dataclass
 class Transaction:
     id: UUID
-    from_account: Account
-    to_account: Account
+    from_account: 'Account'
+    to_account: 'Account'
     amount: Decimal
     created_at: datetime
+    timestamp: datetime = field(default_factory=datetime.now)

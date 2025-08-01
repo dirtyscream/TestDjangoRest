@@ -34,3 +34,9 @@ class NegativeAmountException(APIException):
     status_code = 422
     default_detail = 'Transfer amount must be positive'
     default_code = 'negative_amount'
+
+
+class DailyTransferLimitExceeded(APIException):
+    status_cod = 422
+    default_detail = 'Daily limit per day is expired'
+    default_code = 'daily limit'
