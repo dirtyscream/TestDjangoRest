@@ -26,3 +26,5 @@ class TransactionViewSet(BaseViewSet,
     def get_all_entities(self, params: dict | None = None):
         if params and 'account_id' in params:
             return self.service.get_for_account(params['account_id'])
+        raise ValidationError(
+            detail=f"Invalid input, try to filter by account id",)
