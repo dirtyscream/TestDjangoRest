@@ -12,7 +12,7 @@ class AccountViewSet(BaseViewSet,
     serializer_class = AccountSerializer
     service = AccountService()
 
-    def get_entity(self, entity_id: str):
+    def get_entity(self, entity_id):
         return self.service.get_account(entity_id)
 
     def get_all_entities(self):

@@ -1,3 +1,4 @@
+from typing import List
 from uuid import UUID
 from decimal import Decimal
 from transaction.domain.entity import Transaction
@@ -18,8 +19,10 @@ class TransactionService(ITransactionService):
                          from_account: UUID,
                          to_account: UUID,
                          amount: Decimal) -> Transaction:
-        from_account: Account = self.account_repository.get_by_id(from_account, True)
-        to_account: Account = self.account_repository.get_by_id(to_account, True)
+        from_account: Account = self.account_repository.get_by_id(
+            from_account, True)
+        to_account: Account = self.account_repository.get_by_id(
+            to_account, True)
         from_account.transfer_to(to_account, amount)
         self.account_repository.save(from_account)
         self.account_repository.save(to_account)
@@ -31,3 +34,7 @@ class TransactionService(ITransactionService):
             created_at=timezone.now()
         )
         return self.transaction_repository.save(transaction)
+
+    def get_for_account(self, account_id: UUID) -> List[Transaction]:
+        account: Account = self.account_repository.get_by_id(account_id)
+        return self.transaction_repository.get_for_account(account)

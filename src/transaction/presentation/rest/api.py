@@ -1,6 +1,6 @@
 from decimal import DecimalException
 from core.presentation.viewsets.base_viewset import BaseViewSet
-from core.presentation.mixins.mixins import CreateModelMixin
+from core.presentation.mixins.mixins import CreateModelMixin, ListModelMixin
 from transaction.application.service import TransactionService
 from transaction.presentation.rest.serializer import TransactionSerializer
 from transaction.domain.entity import Transaction
@@ -8,7 +8,8 @@ from rest_framework.exceptions import ValidationError
 
 
 class TransactionViewSet(BaseViewSet,
-                         CreateModelMixin):
+                         CreateModelMixin,
+                         ListModelMixin):
     serializer_class = TransactionSerializer
     service = TransactionService()
 
@@ -21,3 +22,7 @@ class TransactionViewSet(BaseViewSet,
             )
         except (KeyError, ValueError, DecimalException) as e:
             raise ValidationError(detail=f"Invalid input: {str(e)}")
+
+    def get_all_entities(self, params: dict | None = None):
+        if params and 'account_id' in params:
+            return self.service.get_for_account(params['account_id'])

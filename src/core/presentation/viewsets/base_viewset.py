@@ -10,3 +10,5 @@ class BaseViewSet(
 
     def get_queryset(self):
         return self.queryset
+
+    

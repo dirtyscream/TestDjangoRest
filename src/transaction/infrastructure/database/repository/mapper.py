@@ -27,4 +27,4 @@ class TransactionMapper:
         )
 
     def to_entity_list(self, instances: List[TransactionModel]) -> List[Transaction]:
-        return [self.to_entity(instance=i) for i in instances]
+        return [self.to_entity(model=i) for i in instances]

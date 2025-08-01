@@ -12,7 +12,7 @@ class BaseServiceMixin(Generic[T, ID]):
     def get_entity(self, entity_id: ID) -> T:
         raise NotImplementedError
 
-    def get_all_entities(self) -> list[T]:
+    def get_all_entities(self, params: dict | None = None) -> list[T]:
         raise NotImplementedError
 
     def create_entity(self, data: dict) -> T:
@@ -42,9 +42,17 @@ class RetrieveModelMixin(BaseServiceMixin[T, ID]):
 class ListModelMixin(BaseServiceMixin[T, ID]):
 
     def list(self, request, *args, **kwargs) -> Response:
-        entities = self.get_all_entities()
-        serializer = self.get_serializer(entities, many=True)
-        return Response(serializer.data)
+        query_params = request.query_params.dict()
+        filter_params = query_params if query_params else None
+        try:
+            entities = self.get_all_entities(params=filter_params)
+            serializer = self.get_serializer(entities, many=True)
+            return Response(serializer.data)
+        except Exception as e:
+            return Response(
+                {'error': str(e)},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
 
 class CreateModelMixin(BaseServiceMixin[T, ID]):
