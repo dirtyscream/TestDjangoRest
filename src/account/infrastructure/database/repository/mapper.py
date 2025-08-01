@@ -1,9 +1,6 @@
-from typing import List, TypeVar
-
-from django.db.models import Model
+from typing import List
 from account.domain.entity import Account
 from account.infrastructure.database.models import AccountModel
-DjangoModelType = TypeVar("DjangoModelType", bound=Model)
 
 
 class AccountMapper:

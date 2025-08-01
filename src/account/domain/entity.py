@@ -21,6 +21,13 @@ class Account:
         self.balance -= amount
         target_account.balance += amount
 
+    def __post_init__(self):
+        self._validate_balance()
+
+    def _validate_balance(self):
+        if self.balance < 0:
+            raise NegativeAmountException("Account balance must be positive")
+
     def _validate_transfer(self, target_account: 'Account', amount: Decimal) -> None:
         if amount <= 0:
             raise NegativeAmountException("Transfer amount must be positive")
@@ -30,7 +37,3 @@ class Account:
             raise InsufficientFundsException(
                 f"Insufficient funds. Available: {self.balance}, required: {amount}"
             )
-
-    def can_transfer(self, target_account: 'Account', amount: Decimal) -> bool:
-        self._validate_transfer(target_account, amount)
-        return True

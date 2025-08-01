@@ -1,5 +1,6 @@
 from rest_framework.viewsets import GenericViewSet
 
+
 class BaseViewSet(
     GenericViewSet
 ):
